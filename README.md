@@ -23,7 +23,7 @@ npm run dev
 
 1. このディレクトリをGitHubリポジトリにpush
 2. Vercelで「Import Project」
-3. 環境変数に `NEXT_PUBLIC_API_BASE` / `NEXT_PUBLIC_WS_BASE` をRailwayのURLで設定
+3. 環境変数に `NEXT_PUBLIC_API_BASE` / `NEXT_PUBLIC_WS_BASE` をRenderのURLで設定
    （`wss://` を忘れないこと。VercelはHTTPS配信なので、混合コンテンツ回避のため
    バックエンド側もwss/https必須）
 
