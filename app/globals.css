@@ -1,0 +1,437 @@
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap");
+
+:root {
+  /* ナイターの球場、闇に沈んだスタンドの中に浮かぶスコアボード、がモチーフ */
+  --bg-stadium: #081714;
+  --bg-stadium-glow: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(255, 182, 39, 0.08),
+    transparent 60%
+  );
+  --panel: #0f2b23;
+  --panel-edge: #1f4a3c;
+  --panel-edge-bright: #2e6b54;
+
+  --lamp-amber: #ffb627;
+  --lamp-amber-dim: #6b5322;
+  --lamp-ball: #4fb8e8;
+  --lamp-strike: #ffd23f;
+  --lamp-red: #e8482c;
+  --lamp-red-dim: #5a2a20;
+  --lamp-off: #1c342c;
+
+  --ink: #f3efe1;
+  --ink-dim: #9db3a9;
+  --ink-faint: #567064;
+
+  --font-display: "Chakra Petch", "Noto Sans JP", sans-serif;
+  --font-body: "Noto Sans JP", "Chakra Petch", sans-serif;
+
+  --radius-panel: 14px;
+  --radius-lamp: 999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg-stadium);
+  background-image: var(--bg-stadium-glow);
+  color: var(--ink);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--lamp-amber);
+  color: var(--bg-stadium);
+}
+
+/* ---- レイアウト共通 ---- */
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--panel-edge);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.page-title small {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-dim);
+  letter-spacing: 0.08em;
+}
+
+.back-link {
+  font-size: 13px;
+  color: var(--ink-dim);
+  border: 1px solid var(--panel-edge);
+  border-radius: 999px;
+  padding: 6px 14px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.back-link:hover {
+  border-color: var(--lamp-amber);
+  color: var(--lamp-amber);
+}
+
+/* ---- 試合カード一覧 ---- */
+
+.league-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-faint);
+  margin: 28px 0 10px;
+  text-transform: uppercase;
+}
+
+.game-card {
+  display: block;
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius-panel);
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--lamp-amber) 0%, transparent 2.5%);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.game-card:hover {
+  border-color: var(--panel-edge-bright);
+  transform: translateX(2px);
+}
+
+.game-card:hover::before {
+  opacity: 1;
+}
+
+.game-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.game-card-teams {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.game-card-teams .vs {
+  color: var(--ink-faint);
+  font-weight: 400;
+  margin: 0 8px;
+  font-size: 13px;
+}
+
+.game-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--ink-dim);
+  white-space: nowrap;
+}
+
+.status-pill {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-edge-bright);
+  color: var(--ink-dim);
+}
+
+.status-pill.is-live {
+  color: var(--bg-stadium);
+  background: var(--lamp-amber);
+  border-color: var(--lamp-amber);
+}
+
+.game-card-sub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.empty-state {
+  color: var(--ink-dim);
+  font-size: 14px;
+  padding: 40px 0;
+  text-align: center;
+  border: 1px dashed var(--panel-edge);
+  border-radius: var(--radius-panel);
+}
+
+/* ---- カウンターパネル（参照サイトの黒い部分を再現） ---- */
+
+.counter-panel {
+  --c-dot-off: #808080;
+  --c-dot-on: #f5f5f5;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+  background: #000;
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  font-family: "Helvetica Neue", Arial, "Noto Sans JP", sans-serif;
+}
+
+.counter-teams {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.counter-team-row {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 10px 0;
+}
+
+.counter-team-name {
+  display: flex;
+  align-items: baseline;
+  font-size: 56px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.counter-bar {
+  font-weight: 400;
+  margin-right: 6px;
+}
+
+.counter-team-score {
+  font-size: 56px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.counter-divider {
+  height: 2px;
+  background: #fff;
+  margin: 2px 0;
+  width: 85%;
+}
+
+.counter-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
+  padding-left: 24px;
+}
+
+.counter-diamond {
+  position: relative;
+  width: 90px;
+  height: 46px;
+}
+
+.c-dot {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c-dot-off);
+  transition: background 0.2s ease;
+}
+
+.c-dot.is-on {
+  background: var(--c-dot-on);
+}
+
+.counter-runner-names {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #2a2a2a;
+}
+
+.counter-diamond .c-dot {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  transform: rotate(45deg);
+}
+
+.c-dot--2b {
+  top: -6px;
+  left: 32px;
+}
+
+.c-dot--3b {
+  top: 18px;
+  left: 2px;
+}
+
+.c-dot--1b {
+  top: 18px;
+  left: 62px;
+}
+
+.counter-bso {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.counter-bso-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter-bso-label {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  width: 16px;
+}
+
+.counter-bso-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.inning-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ---- 直近の1球（ティッカー） ---- */
+
+.pitch-ticker {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--panel-edge);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pitch-ticker-result {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--lamp-amber);
+}
+
+.pitch-ticker-info {
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+
+.pitch-ticker-empty {
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+
+
+/* ---- 接続ステータス ---- */
+
+.conn-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  margin-top: 14px;
+}
+
+.conn-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+}
+
+.conn-status.is-open .conn-dot {
+  background: var(--lamp-amber);
+  box-shadow: 0 0 6px 1px var(--lamp-amber);
+}
+
+.conn-status.is-error .conn-dot,
+.conn-status.is-closed .conn-dot {
+  background: var(--lamp-red);
+}
+
+.error-banner {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--lamp-red);
+}
