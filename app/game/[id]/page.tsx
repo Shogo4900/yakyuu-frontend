@@ -29,6 +29,12 @@ export default function GamePage({ params }: { params: { id: string } }) {
 
       {state?.inning?.raw && <div className="inning-label">{state.inning.raw}</div>}
 
+      {state?.suspended && (
+        <div className="suspended-banner">
+          試合中止{state.suspendedReason ? `（${state.suspendedReason}）` : ""}
+        </div>
+      )}
+
       <CounterPanel
         score={state?.score ?? []}
         count={state?.count ?? { balls: 0, strikes: 0, outs: 0 }}

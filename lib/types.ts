@@ -49,6 +49,8 @@ export type GameState = {
   battingTeam: string | null;
   runners: Runners;
   runnerNames: RunnerNames;
+  suspended: boolean;
+  suspendedReason: string | null;
   score: ScoreEntry[];
 };
 
