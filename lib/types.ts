@@ -56,4 +56,5 @@ export type GameState = {
 
 export type WsMessage =
   | { type: "update"; gameId: string; state: GameState }
-  | { type: "error"; gameId: string; message: string };
+  | { type: "error"; gameId: string; message: string }
+  | { type: "heartbeat"; ts: number };
