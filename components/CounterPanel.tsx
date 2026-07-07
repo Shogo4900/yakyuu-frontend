@@ -35,7 +35,7 @@ export default function CounterPanel({ score, count, runners, runnerNames }: Pro
       <div className="counter-teams">
         <div className="counter-team-row">
           <span className="counter-team-name">
-            <span className="counter-bar">|</span>
+            <span className={`counter-bar${top?.active ? " is-batting" : ""}`} />
             {toOneChar(top?.team)}
           </span>
           <span className="counter-team-score">{top?.runs ?? "0"}</span>
@@ -43,7 +43,7 @@ export default function CounterPanel({ score, count, runners, runnerNames }: Pro
         <div className="counter-divider" />
         <div className="counter-team-row">
           <span className="counter-team-name">
-            <span className="counter-bar">|</span>
+            <span className={`counter-bar${bottom?.active ? " is-batting" : ""}`} />
             {toOneChar(bottom?.team)}
           </span>
           <span className="counter-team-score">{bottom?.runs ?? "0"}</span>
