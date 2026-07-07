@@ -58,9 +58,9 @@ export default function CounterPanel({ score, count, runners, runnerNames }: Pro
         </div>
 
         <div className="counter-bso">
-          <CounterRow label="B" count={count.balls} max={3} />
-          <CounterRow label="S" count={count.strikes} max={2} />
-          <CounterRow label="O" count={count.outs} max={2} />
+          <CounterRow label="B" count={count.balls} max={3} color="ball" />
+          <CounterRow label="S" count={count.strikes} max={2} color="strike" />
+          <CounterRow label="O" count={count.outs} max={2} color="out" />
         </div>
       </div>
 
@@ -69,13 +69,26 @@ export default function CounterPanel({ score, count, runners, runnerNames }: Pro
   );
 }
 
-function CounterRow({ label, count, max }: { label: string; count: number; max: number }) {
+function CounterRow({
+  label,
+  count,
+  max,
+  color,
+}: {
+  label: string;
+  count: number;
+  max: number;
+  color: "ball" | "strike" | "out";
+}) {
   return (
     <div className="counter-bso-row">
       <span className="counter-bso-label">{label}</span>
       <span className="counter-bso-dots">
         {Array.from({ length: max }).map((_, i) => (
-          <span key={i} className={`c-dot${i < count ? " is-on" : ""}`} />
+          <span
+            key={i}
+            className={`c-dot c-dot--${color}${i < count ? " is-on" : ""}`}
+          />
         ))}
       </span>
     </div>
