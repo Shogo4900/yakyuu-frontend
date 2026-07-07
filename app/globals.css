@@ -248,7 +248,7 @@ button {
 
 .counter-team-name {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   font-size: 56px;
   font-weight: 700;
   color: #fff;
@@ -256,8 +256,18 @@ button {
 }
 
 .counter-bar {
-  font-weight: 400;
-  margin-right: 6px;
+  display: inline-block;
+  width: 4px;
+  height: 0.75em;
+  background: #fff;
+  margin-right: 10px;
+  border-radius: 1px;
+  flex-shrink: 0;
+  transition: width 0.2s ease;
+}
+
+.counter-bar.is-batting {
+  width: 12px;
 }
 
 .counter-team-score {
@@ -362,11 +372,12 @@ button {
 
 .inning-label {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 28px;
+  font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--ink-dim);
+  color: var(--ink);
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 /* ---- 直近の1球（ティッカー） ---- */
