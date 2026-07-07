@@ -313,6 +313,21 @@ button {
   background: var(--c-dot-on);
 }
 
+.c-dot--ball.is-on {
+  background: #22c55e;
+  box-shadow: 0 0 8px 1px rgba(34, 197, 94, 0.6);
+}
+
+.c-dot--strike.is-on {
+  background: #eab308;
+  box-shadow: 0 0 8px 1px rgba(234, 179, 8, 0.6);
+}
+
+.c-dot--out.is-on {
+  background: #ef4444;
+  box-shadow: 0 0 8px 1px rgba(239, 68, 68, 0.6);
+}
+
 .counter-runner-names {
   flex-basis: 100%;
   text-align: center;
